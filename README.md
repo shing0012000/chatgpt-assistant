@@ -18,3 +18,17 @@ It allows users to chat with various large language models (GPT-3.5, GPT-4o, Lla
    ```bash
    git clone https://github.com/shing0012000/chatgpt-assistant.git
    cd chatgpt-assistant
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file with your API key:
+   ```
+   OPENROUTER_API_KEY=your_key_here
+   ```
+4. Run the app:
+   ```bash
+   streamlit run app.py
+   ```
+
