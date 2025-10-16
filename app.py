@@ -28,9 +28,18 @@ if user_input:
         "messages": st.session_state["messages"],
     }
 
-    response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
-    reply = response.json()["choices"][0]["message"]["content"]
-    st.session_state["messages"].append({"role": "assistant", "content": reply})
+response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
+
+if response.status_code == 200:
+    data = response.json()
+    if "choices" in data and len(data["choices"]) > 0:
+        reply = data["choices"][0]["message"]["content"]
+        st.session_state["messages"].append({"role": "assistant", "content": reply})
+    else:
+        st.error("⚠️ The model returned an unexpected response format.")
+else:
+    st.error(f"⚠️ API Error {response.status_code}: {response.text}")
+
 
 for message in st.session_state["messages"][1:]:
     if message["role"] == "user":
