@@ -4,7 +4,8 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-api_key = os.getenv("OPENROUTER_API_KEY")
+# For Streamlit Cloud, it will read from secrets automatically
+api_key = os.getenv("OPENROUTER_API_KEY") or st.secrets["OPENROUTER_API_KEY"]
 
 st.set_page_config(page_title="ChatGPT Assistant (Free API)", page_icon="💬")
 st.title("💬 Simple ChatGPT Assistant (via OpenRouter)")
